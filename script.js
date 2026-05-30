@@ -523,7 +523,28 @@ $('#addUrlBtn').onclick=()=>{$('#urlInput').value='';$('#urlLabel').value='';$('
 $('#urlSubmit').onclick=()=>{const u=$('#urlInput').value.trim();if(!u){toast('Enter URL','error');return}const y=extractYtId(u);if(y){addEl({type:'youtube',youtubeId:y,url:u,width:360,height:215});closeDiags();toast('YouTube added','success');return}const t=$('#urlType').value,l=$('#urlLabel').value.trim()||u.split('/').pop();if(t==='image')addEl({type:'image',src:u,label:l});else if(t==='video')addEl({type:'video',src:u,label:l,width:320,height:200});else addEl({type:'audio',src:u,label:l});closeDiags();toast('Added','success')};
 stopSpace($('#urlLabel'));
 $('#addLinkBtn').onclick=()=>{$('#linkUrl').value='';$('#linkTitle').value='';$('#linkDesc').value='';openDiag('linkDialog')};
-$('#linkSubmit').onclick=()=>{const u=$('#linkUrl').value.trim();if(!u){toast('Enter URL','error');return}addEl({type:'link',url:u,title:$('#linkTitle').value.trim()||'Link',desc:$('#linkDesc').value.trim()||'',width:240});closeDiags();toast('Added','success')};
+$('#linkSubmit').onclick = () => {
+    let u = $('#linkUrl').value.trim();
+    if (!u) {
+        toast('Enter URL', 'error');
+        return;
+    }
+    
+    // Add this check to prepend https:// if missing
+    if (!/^https?:\/\//i.test(u)) {
+        u = 'https://' + u;
+    }
+
+    addEl({
+        type: 'link',
+        url: u,
+        title: $('#linkTitle').value.trim() || 'Link',
+        desc: $('#linkDesc').value.trim() || '',
+        width: 240
+    });
+    closeDiags();
+    toast('Added', 'success');
+};
 stopSpace($('#linkTitle'));stopSpace($('#linkDesc'));
 const genI=$('#genericFileInput');$('#addFileBtn').onclick=()=>genI.click();
 genI.onchange=async()=>{await procFiles(genI.files);genI.value=''};
