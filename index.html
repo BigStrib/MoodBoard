@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodBoard</title>
+    <title>MoodBoard Pro</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -11,17 +11,23 @@
     <div class="toolbar" id="toolbar">
         <div class="toolbar-brand">
             <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="7" height="7" rx="1"/>
-                <rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/>
-                <rect x="14" y="14" width="7" height="7" rx="1"/>
+                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
             </svg>
-            <span>MoodBoard</span>
+            <span>MoodBoard Pro</span>
         </div>
         <div class="toolbar-divider"></div>
         <div class="toolbar-actions">
             <button class="tool-btn" id="addTextBtn" title="Add Text Note">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+            </button>
+            <button class="tool-btn" id="addFontBtn" title="Add Font Sample">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <text x="3" y="17" font-size="14" font-weight="800" font-family="serif" fill="currentColor" stroke="none">Aa</text>
+                    <path d="M16 5c1.5 0 3 .8 3 2.5S17.5 10 16 10" stroke-linecap="round"/>
+                    <path d="M16 10c1.5 0 3 .8 3 2.8S17.5 16 16 16" stroke-linecap="round"/>
+                    <line x1="14" y1="5" x2="14" y2="16"/>
+                </svg>
             </button>
             <button class="tool-btn" id="addImageBtn" title="Add Image">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
@@ -47,25 +53,23 @@
         </div>
         <div class="toolbar-divider"></div>
         <div class="toolbar-actions">
-            <button class="tool-btn" id="snapToggleBtn" title="Toggle Snap to Grid">
+            <button class="tool-btn" id="snapToggleBtn" title="Toggle Grid">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
             </button>
-            <button class="tool-btn" id="exportBtn" title="Export Board">
+            <button class="tool-btn" id="exportBtn" title="Export">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             </button>
-            <button class="tool-btn" id="importBtn" title="Import Board">
+            <button class="tool-btn" id="importBtn" title="Import">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             </button>
             <button class="tool-btn" id="resetViewBtn" title="Reset View">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
             </button>
-            <button class="tool-btn" id="clearBtn" title="Clear Board">
+            <button class="tool-btn" id="clearBtn" title="Clear">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
             </button>
         </div>
-        <div class="toolbar-right">
-            <span class="zoom-level" id="zoomLevel">100%</span>
-        </div>
+        <div class="toolbar-right"><span class="zoom-level" id="zoomLevel">100%</span></div>
     </div>
 
     <div class="canvas-viewport" id="canvasViewport">
@@ -91,146 +95,119 @@
 
     <div class="dialog-overlay" id="dialogOverlay">
         <div class="dialog" id="colorDialog">
-            <div class="dialog-header">
-                <h3>Add Color Palette</h3>
-                <button class="dialog-close-btn" data-dialog="colorDialog">×</button>
-            </div>
+            <div class="dialog-header"><h3>Add Color Palette</h3><button class="dialog-close-btn" data-dialog="colorDialog">×</button></div>
             <div class="dialog-body">
-                <label>Palette Name</label>
-                <input type="text" id="paletteName" placeholder="My Color Theme" />
-                <label>Colors</label>
-                <div class="palette-builder" id="paletteBuilder"></div>
+                <label>Palette Name</label><input type="text" id="paletteName" placeholder="My Color Theme"/>
+                <label>Colors</label><div class="palette-builder" id="paletteBuilder"></div>
                 <button class="btn btn-small" id="addSwatchBtn">+ Add Color</button>
             </div>
-            <div class="dialog-footer">
-                <button class="btn btn-secondary" data-dialog="colorDialog">Cancel</button>
-                <button class="btn btn-primary" id="colorSubmit">Add Palette</button>
-            </div>
+            <div class="dialog-footer"><button class="btn btn-secondary" data-dialog="colorDialog">Cancel</button><button class="btn btn-primary" id="colorSubmit">Add Palette</button></div>
         </div>
         <div class="dialog" id="urlDialog">
-            <div class="dialog-header">
-                <h3>Add Media from URL</h3>
-                <button class="dialog-close-btn" data-dialog="urlDialog">×</button>
-            </div>
+            <div class="dialog-header"><h3>Add Media from URL</h3><button class="dialog-close-btn" data-dialog="urlDialog">×</button></div>
             <div class="dialog-body">
-                <label>Media URL</label>
-                <input type="url" id="urlInput" placeholder="https://example.com/image.jpg" />
-                <label>Type</label>
-                <select id="urlType">
-                    <option value="image">Image</option>
-                    <option value="video">Video</option>
-                    <option value="audio">Audio</option>
-                </select>
-                <label>Label (optional)</label>
-                <input type="text" id="urlLabel" placeholder="Description..." />
+                <label>Media URL</label><input type="url" id="urlInput" placeholder="https://example.com/image.jpg"/>
+                <label>Type</label><select id="urlType"><option value="image">Image</option><option value="video">Video</option><option value="audio">Audio</option></select>
+                <label>Label</label><input type="text" id="urlLabel" placeholder="Description..."/>
             </div>
-            <div class="dialog-footer">
-                <button class="btn btn-secondary" data-dialog="urlDialog">Cancel</button>
-                <button class="btn btn-primary" id="urlSubmit">Add Media</button>
-            </div>
+            <div class="dialog-footer"><button class="btn btn-secondary" data-dialog="urlDialog">Cancel</button><button class="btn btn-primary" id="urlSubmit">Add Media</button></div>
         </div>
         <div class="dialog" id="linkDialog">
-            <div class="dialog-header">
-                <h3>Add Clickable Link</h3>
-                <button class="dialog-close-btn" data-dialog="linkDialog">×</button>
-            </div>
+            <div class="dialog-header"><h3>Add Clickable Link</h3><button class="dialog-close-btn" data-dialog="linkDialog">×</button></div>
             <div class="dialog-body">
-                <label>URL</label>
-                <input type="url" id="linkUrl" placeholder="https://example.com" />
-                <label>Display Title</label>
-                <input type="text" id="linkTitle" placeholder="My Link" />
-                <label>Description (optional)</label>
-                <input type="text" id="linkDesc" placeholder="Click to visit..." />
+                <label>URL</label><input type="url" id="linkUrl" placeholder="https://example.com"/>
+                <label>Title</label><input type="text" id="linkTitle" placeholder="My Link"/>
+                <label>Description</label><input type="text" id="linkDesc" placeholder="Click to visit..."/>
             </div>
-            <div class="dialog-footer">
-                <button class="btn btn-secondary" data-dialog="linkDialog">Cancel</button>
-                <button class="btn btn-primary" id="linkSubmit">Add Link</button>
+            <div class="dialog-footer"><button class="btn btn-secondary" data-dialog="linkDialog">Cancel</button><button class="btn btn-primary" id="linkSubmit">Add Link</button></div>
+        </div>
+        <div class="dialog dialog-wide" id="fontDialog">
+            <div class="dialog-header"><h3>Add Google Font</h3><button class="dialog-close-btn" data-dialog="fontDialog">×</button></div>
+            <div class="dialog-body">
+                <label>Search <span id="fontCount" class="font-count-badge">0 fonts</span></label>
+                <input type="text" id="fontSearch" placeholder="Search all Google Fonts..." autocomplete="off"/>
+                <div class="font-category-filters" id="fontCatFilters">
+                    <button class="fcf-btn active" data-cat="all">All</button>
+                    <button class="fcf-btn" data-cat="sans-serif">Sans Serif</button>
+                    <button class="fcf-btn" data-cat="serif">Serif</button>
+                    <button class="fcf-btn" data-cat="display">Display</button>
+                    <button class="fcf-btn" data-cat="handwriting">Handwriting</button>
+                    <button class="fcf-btn" data-cat="monospace">Monospace</button>
+                </div>
+                <div class="font-results-wrap">
+                    <div class="font-results" id="fontResults">
+                        <div class="font-loading">Loading fonts...</div>
+                    </div>
+                </div>
+                <label>Preview Text</label>
+                <input type="text" id="fontPreviewText" value="The quick brown fox jumps over the lazy dog" placeholder="Preview text..."/>
+                <label>Font Size</label>
+                <input type="range" id="fontSizeSlider" min="14" max="72" value="32" class="font-slider"/>
+                <div class="font-size-val"><span id="fontSizeVal">32</span>px</div>
             </div>
+            <div class="dialog-footer"><button class="btn btn-secondary" data-dialog="fontDialog">Cancel</button><button class="btn btn-primary" id="fontSubmit" disabled>Add Font</button></div>
         </div>
     </div>
 
-    <!-- Custom Color Picker -->
     <div class="color-picker-overlay" id="colorPickerOverlay">
-        <div class="color-picker" id="colorPicker">
-            <div class="cp-header">
-                <span>Color Picker</span>
-                <button class="cp-close" id="cpClose">×</button>
-            </div>
+        <div class="color-picker">
+            <div class="cp-header"><span>Color Picker</span><button class="cp-close" id="cpClose">×</button></div>
             <div class="cp-body">
-                <div class="cp-saturation-wrap" id="cpSatWrap">
-                    <canvas class="cp-saturation" id="cpSatCanvas" width="260" height="180"></canvas>
-                    <div class="cp-sat-cursor" id="cpSatCursor"></div>
-                </div>
-                <div class="cp-hue-wrap" id="cpHueWrap">
-                    <canvas class="cp-hue" id="cpHueCanvas" width="260" height="16"></canvas>
-                    <div class="cp-hue-cursor" id="cpHueCursor"></div>
-                </div>
+                <div class="cp-saturation-wrap" id="cpSatWrap"><canvas class="cp-saturation" id="cpSatCanvas" width="260" height="180"></canvas><div class="cp-sat-cursor" id="cpSatCursor"></div></div>
+                <div class="cp-hue-wrap" id="cpHueWrap"><canvas class="cp-hue" id="cpHueCanvas" width="260" height="16"></canvas><div class="cp-hue-cursor" id="cpHueCursor"></div></div>
                 <div class="cp-preview-row">
                     <div class="cp-preview-swatch" id="cpPreview"></div>
                     <div class="cp-inputs">
-                        <div class="cp-input-group">
-                            <label>HEX</label>
-                            <input type="text" id="cpHexInput" maxlength="7" placeholder="#FF0000" />
-                        </div>
-                        <div class="cp-input-row">
-                            <div class="cp-input-group small">
-                                <label>R</label>
-                                <input type="number" id="cpR" min="0" max="255" />
-                            </div>
-                            <div class="cp-input-group small">
-                                <label>G</label>
-                                <input type="number" id="cpG" min="0" max="255" />
-                            </div>
-                            <div class="cp-input-group small">
-                                <label>B</label>
-                                <input type="number" id="cpB" min="0" max="255" />
-                            </div>
-                        </div>
-                        <div class="cp-input-row">
-                            <div class="cp-input-group small">
-                                <label>H</label>
-                                <input type="number" id="cpH" min="0" max="360" />
-                            </div>
-                            <div class="cp-input-group small">
-                                <label>S</label>
-                                <input type="number" id="cpS" min="0" max="100" />
-                            </div>
-                            <div class="cp-input-group small">
-                                <label>L</label>
-                                <input type="number" id="cpL" min="0" max="100" />
-                            </div>
-                        </div>
+                        <div class="cp-input-group"><label>HEX</label><input type="text" id="cpHexInput" maxlength="7"/></div>
+                        <div class="cp-input-row"><div class="cp-input-group small"><label>R</label><input type="number" id="cpR" min="0" max="255"/></div><div class="cp-input-group small"><label>G</label><input type="number" id="cpG" min="0" max="255"/></div><div class="cp-input-group small"><label>B</label><input type="number" id="cpB" min="0" max="255"/></div></div>
+                        <div class="cp-input-row"><div class="cp-input-group small"><label>H</label><input type="number" id="cpH" min="0" max="360"/></div><div class="cp-input-group small"><label>S</label><input type="number" id="cpS" min="0" max="100"/></div><div class="cp-input-group small"><label>L</label><input type="number" id="cpL" min="0" max="100"/></div></div>
                     </div>
                 </div>
                 <div class="cp-presets">
-                    <div class="cp-preset" style="background:#FF6B6B" data-color="#FF6B6B"></div>
-                    <div class="cp-preset" style="background:#FF8E53" data-color="#FF8E53"></div>
-                    <div class="cp-preset" style="background:#FFEAA7" data-color="#FFEAA7"></div>
-                    <div class="cp-preset" style="background:#55EFC4" data-color="#55EFC4"></div>
-                    <div class="cp-preset" style="background:#4ECDC4" data-color="#4ECDC4"></div>
-                    <div class="cp-preset" style="background:#45B7D1" data-color="#45B7D1"></div>
-                    <div class="cp-preset" style="background:#6C63FF" data-color="#6C63FF"></div>
-                    <div class="cp-preset" style="background:#A29BFE" data-color="#A29BFE"></div>
-                    <div class="cp-preset" style="background:#FD79A8" data-color="#FD79A8"></div>
-                    <div class="cp-preset" style="background:#FFFFFF" data-color="#FFFFFF"></div>
-                    <div class="cp-preset" style="background:#B2BEC3" data-color="#B2BEC3"></div>
-                    <div class="cp-preset" style="background:#636E72" data-color="#636E72"></div>
-                    <div class="cp-preset" style="background:#2D3436" data-color="#2D3436"></div>
-                    <div class="cp-preset" style="background:#000000" data-color="#000000"></div>
+                    <div class="cp-preset" style="background:#FF6B6B" data-color="#FF6B6B"></div><div class="cp-preset" style="background:#FF8E53" data-color="#FF8E53"></div><div class="cp-preset" style="background:#FFEAA7" data-color="#FFEAA7"></div><div class="cp-preset" style="background:#55EFC4" data-color="#55EFC4"></div><div class="cp-preset" style="background:#4ECDC4" data-color="#4ECDC4"></div><div class="cp-preset" style="background:#45B7D1" data-color="#45B7D1"></div><div class="cp-preset" style="background:#6C63FF" data-color="#6C63FF"></div><div class="cp-preset" style="background:#A29BFE" data-color="#A29BFE"></div><div class="cp-preset" style="background:#FD79A8" data-color="#FD79A8"></div><div class="cp-preset" style="background:#FFFFFF" data-color="#FFFFFF"></div><div class="cp-preset" style="background:#B2BEC3" data-color="#B2BEC3"></div><div class="cp-preset" style="background:#636E72" data-color="#636E72"></div><div class="cp-preset" style="background:#2D3436" data-color="#2D3436"></div><div class="cp-preset" style="background:#000000" data-color="#000000"></div>
                 </div>
             </div>
-            <div class="cp-footer">
-                <button class="btn btn-secondary btn-sm" id="cpCancel">Cancel</button>
-                <button class="btn btn-primary btn-sm" id="cpConfirm">Apply</button>
+            <div class="cp-footer"><button class="btn btn-secondary btn-sm" id="cpCancel">Cancel</button><button class="btn btn-primary btn-sm" id="cpConfirm">Apply</button></div>
+        </div>
+    </div>
+
+    <div class="font-size-popup-overlay" id="fontSizePopupOverlay">
+        <div class="font-size-popup">
+            <div class="fsp-header"><span>Adjust Font Size</span><button class="fsp-close" id="fspClose">×</button></div>
+            <div class="fsp-body">
+                <div class="fsp-preview" id="fspPreview">Aa</div>
+                <div class="fsp-slider-row">
+                    <input type="range" class="fsp-slider" id="fspSlider" min="8" max="120" value="32"/>
+                    <div class="fsp-value" id="fspValue">32px</div>
+                </div>
+                <div class="fsp-input-row">
+                    <span class="fsp-input-label">Custom:</span>
+                    <input type="number" class="fsp-input" id="fspInput" min="8" max="200" value="32"/>
+                    <span class="fsp-input-label">px</span>
+                </div>
+                <div class="fsp-presets" id="fspPresets">
+                    <button class="fsp-preset" data-size="12">12</button><button class="fsp-preset" data-size="14">14</button>
+                    <button class="fsp-preset" data-size="16">16</button><button class="fsp-preset" data-size="20">20</button>
+                    <button class="fsp-preset" data-size="24">24</button><button class="fsp-preset" data-size="28">28</button>
+                    <button class="fsp-preset" data-size="32">32</button><button class="fsp-preset" data-size="36">36</button>
+                    <button class="fsp-preset" data-size="42">42</button><button class="fsp-preset" data-size="48">48</button>
+                    <button class="fsp-preset" data-size="56">56</button><button class="fsp-preset" data-size="64">64</button>
+                    <button class="fsp-preset" data-size="72">72</button><button class="fsp-preset" data-size="96">96</button>
+                    <button class="fsp-preset" data-size="120">120</button>
+                </div>
+            </div>
+            <div class="fsp-footer">
+                <button class="btn btn-secondary btn-sm" id="fspCancel">Cancel</button>
+                <button class="btn btn-primary btn-sm" id="fspApply">Apply</button>
             </div>
         </div>
     </div>
 
-    <input type="file" id="imageFileInput" accept="image/*" multiple hidden />
-    <input type="file" id="videoFileInput" accept="video/*" multiple hidden />
-    <input type="file" id="audioFileInput" accept="audio/*" multiple hidden />
-    <input type="file" id="genericFileInput" accept="image/*,video/*,audio/*,.pdf,.txt,.md,.json,.csv" multiple hidden />
-    <input type="file" id="importFileInput" accept=".json" hidden />
+    <input type="file" id="imageFileInput" accept="image/*" multiple hidden/>
+    <input type="file" id="videoFileInput" accept="video/*" multiple hidden/>
+    <input type="file" id="audioFileInput" accept="audio/*" multiple hidden/>
+    <input type="file" id="genericFileInput" accept="image/*,video/*,audio/*,.pdf,.txt,.md,.json,.csv,.js,.ts,.py,.html,.css,.xml,.yaml,.yml" multiple hidden/>
+    <input type="file" id="importFileInput" accept=".json" hidden/>
 
     <div class="toast-container" id="toastContainer"></div>
     <script src="script.js"></script>
